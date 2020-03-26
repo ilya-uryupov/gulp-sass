@@ -15,7 +15,7 @@ Only [Active LTS and Current releases][1] are supported.
 ```
 npm install gulp-sass --save-dev
 ```
-You must also install either `node-sass` or `sass`.
+You must also install one of these: `dart-sass`, `node-sass`, `sass`.
 
 # Basic Usage
 

@@ -118,8 +118,21 @@ const gulpSass = (options, sync) => through.obj((file, enc, cb) => { // eslint-d
     return cb(new PluginError(PLUGIN_NAME, error));
   };
 
-  // eslint-disable-next-line global-require, import/no-extraneous-dependencies
-  const compiler = gulpSass.compiler || require('node-sass');
+  // eslint-disable-next-line global-require, import/no-extraneous-dependencies, prefer-destructuring
+  const compiler = gulpSass.compiler;
+
+  if (typeof compiler !== 'object') {
+    throw new Error('The `compiler` option is required and must be an object!');
+  }
+
+  if (typeof compiler.render !== 'function') {
+    throw new Error('The `compiler` option object must have a `render` method!');
+  }
+
+  if (typeof compiler.renderSync !== 'function') {
+    throw new Error('The `compiler` option object must have a `renderSync` method!');
+  }
+
 
   if (sync !== true) {
     //////////////////////////////
